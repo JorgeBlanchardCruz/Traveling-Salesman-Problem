@@ -9,7 +9,7 @@ using System.Xml;
 namespace Traveling_Salesman_Problem {
     class CTSP_instance {
 
-        private decimal[,] _TSPValues;
+        private decimal[,] _TSPDistances;
 
         public CTSP_instance () {
         }
@@ -23,7 +23,7 @@ namespace Traveling_Salesman_Problem {
                 XmlNode root = Reader.DocumentElement;                
 
                 int numNodes = root.SelectNodes("//graph//vertex").Count;
-                _TSPValues = new decimal[numNodes, numNodes];
+                _TSPDistances = new decimal[numNodes, numNodes];
 
                 int numRow = 0;
                 int numEdge = 0;
@@ -34,13 +34,13 @@ namespace Traveling_Salesman_Problem {
                         numRow++;
                     
                     if (nodeItself(numEdge, numNodes, numRow)) {
-                        _TSPValues[numRow, Convert.ToInt32(nodePositionRelativeRow(numEdge, numNodes))] = 0;
+                        _TSPDistances[numRow, Convert.ToInt32(nodePositionRelativeRow(numEdge, numNodes))] = 0;
 
                         numEdge++;
                     }
 
                     decimal cost = getCost(node.Attributes[0].Value);
-                    _TSPValues[numRow, Convert.ToInt32(node.FirstChild.Value)] = cost;
+                    _TSPDistances[numRow, Convert.ToInt32(node.FirstChild.Value)] = cost;
 
                     numEdge++;
                 }
