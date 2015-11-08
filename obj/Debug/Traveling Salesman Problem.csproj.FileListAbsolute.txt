@@ -1,1 +1,9 @@
 D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\bin\Debug\Traveling Salesman Problem.exe.config
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\bin\Debug\Traveling Salesman Problem.exe
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\bin\Debug\Traveling Salesman Problem.pdb
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling Salesman Problem.csprojResolveAssemblyReference.cache
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling_Salesman_Problem.Form1.resources
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling_Salesman_Problem.Properties.Resources.resources
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling Salesman Problem.csproj.GenerateResource.Cache
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling Salesman Problem.exe
+D:\Ingeniería Informática\2015-2016\COMPLEJIDAD COMPUTACIONAL\Practica 4 Traveling Salesman Problem\Traveling Salesman Problem\obj\Debug\Traveling Salesman Problem.pdb

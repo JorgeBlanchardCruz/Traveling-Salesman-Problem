@@ -9,8 +9,9 @@ using System.Xml;
 namespace Traveling_Salesman_Problem {
     class CTSP_instance {
 
-        public CTSP_instance () {
+        private decimal[,] _TSPValues;
 
+        public CTSP_instance () {
         }
 
         public string makeFromFile (ref Stream file) {
@@ -19,25 +20,44 @@ namespace Traveling_Salesman_Problem {
                 XmlDocument Reader = new XmlDocument();
                 Reader.Load(file);
 
-                XmlNodeList nodelist1 = Reader.SelectNodes("/vertex");
-                foreach (var node in nodelist1) {
+                XmlNode root = Reader.DocumentElement;
+                
 
-                    XmlNodeList nodelist2 = Reader.SelectNodes("/vertex/edge");
-                    foreach (var childnode in nodelist2) {
+                int numNodes = root.SelectNodes("//graph//vertex").Count;
+                _TSPValues = new decimal[numNodes, numNodes];
 
+                int numRow = 0;
+                int numEdge = 0;
+                XmlNodeList nodelist1 = root.SelectNodes("//graph//vertex//edge");
+                foreach (XmlNode node in nodelist1) {
 
+                    if ((numEdge % numNodes) == 0 && numEdge != 0) {
+                        numRow++;
                     }
 
+                    decimal nodePositionRelativeRow = (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numNodes));
+                    if (Convert.ToDecimal(numRow) == nodePositionRelativeRow) {
+                        _TSPValues[numRow, Convert.ToInt32(nodePositionRelativeRow)] = 0;
 
+                        numEdge++;
+                    }
+
+                    decimal cost = getCost(node.Attributes[0].Value);
+                    _TSPValues[numRow, Convert.ToInt32(node.FirstChild.Value)] = cost;
+
+                    numEdge++;
                 }
-
-
-
 
                 return string.Empty;
             } catch (Exception e) {
                 return e.Message;
             }
+        }
+
+        private decimal getCost(string value) {
+            value = value.Replace('.', ',');
+            value = value.Remove(value.LastIndexOf('e'), value.Count() - value.LastIndexOf('e'));
+            return Convert.ToDecimal(value);
         }
 
 
