@@ -20,8 +20,7 @@ namespace Traveling_Salesman_Problem {
                 XmlDocument Reader = new XmlDocument();
                 Reader.Load(file);
 
-                XmlNode root = Reader.DocumentElement;
-                
+                XmlNode root = Reader.DocumentElement;                
 
                 int numNodes = root.SelectNodes("//graph//vertex").Count;
                 _TSPValues = new decimal[numNodes, numNodes];
@@ -31,13 +30,11 @@ namespace Traveling_Salesman_Problem {
                 XmlNodeList nodelist1 = root.SelectNodes("//graph//vertex//edge");
                 foreach (XmlNode node in nodelist1) {
 
-                    if ((numEdge % numNodes) == 0 && numEdge != 0) {
+                    if (changeRow(numEdge, numNodes))
                         numRow++;
-                    }
-
-                    decimal nodePositionRelativeRow = (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numNodes));
-                    if (Convert.ToDecimal(numRow) == nodePositionRelativeRow) {
-                        _TSPValues[numRow, Convert.ToInt32(nodePositionRelativeRow)] = 0;
+                    
+                    if (nodeItself(numEdge, numNodes, numRow)) {
+                        _TSPValues[numRow, Convert.ToInt32(nodePositionRelativeRow(numEdge, numNodes))] = 0;
 
                         numEdge++;
                     }
@@ -52,6 +49,19 @@ namespace Traveling_Salesman_Problem {
             } catch (Exception e) {
                 return e.Message;
             }
+        }
+
+        private bool changeRow (int numEdge, int numNodes) {
+            return ((numEdge % numNodes) == 0 && numEdge != 0 ? true : false);
+        }
+
+        private bool nodeItself (int numEdge, int numNodes, int numRow) {
+            decimal nodePositionRelativeRow_ = nodePositionRelativeRow(numEdge, numNodes);
+            return (Convert.ToDecimal(numRow) == nodePositionRelativeRow_ ? true : false);
+        }
+
+        private decimal nodePositionRelativeRow (int numEdge, int numNodes) {
+            return (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numNodes));
         }
 
         private decimal getCost(string value) {
