@@ -30,10 +30,10 @@ namespace Traveling_Salesman_Problem {
                 XmlNodeList nodelist1 = root.SelectNodes("//graph//vertex//edge");
                 foreach (XmlNode node in nodelist1) {
 
-                    if (changeRow(numEdge, numNodes))
+                    if (isChangeRow(numEdge, numNodes))
                         numRow++;
                     
-                    if (nodeItself(numEdge, numNodes, numRow)) {
+                    if (isNodeItself(numEdge, numNodes, numRow)) {
                         _TSPDistances[numRow, Convert.ToInt32(nodePositionRelativeRow(numEdge, numNodes))] = 0;
 
                         numEdge++;
@@ -51,11 +51,11 @@ namespace Traveling_Salesman_Problem {
             }
         }
 
-        private bool changeRow (int numEdge, int numNodes) {
+        private bool isChangeRow (int numEdge, int numNodes) {
             return ((numEdge % numNodes) == 0 && numEdge != 0 ? true : false);
         }
 
-        private bool nodeItself (int numEdge, int numNodes, int numRow) {
+        private bool isNodeItself (int numEdge, int numNodes, int numRow) {
             decimal nodePositionRelativeRow_ = nodePositionRelativeRow(numEdge, numNodes);
             return (Convert.ToDecimal(numRow) == nodePositionRelativeRow_ ? true : false);
         }
