@@ -10,37 +10,41 @@ using System.Xml;
 namespace Traveling_Salesman_Problem {
     class CTSP_instance {
 
-        private CTSP_Distances Distances;
+        private CTSP_Distances _distances;
+
+        private CTSP_UpperBound _upperBound;
+
+
 
         public string makeFromFile (ref Stream file) {
             try {
 
-                Distances = new CTSP_Distances();
+                _distances = new CTSP_Distances();
 
                 XmlDocument Reader = new XmlDocument();
                 Reader.Load(file);
 
                 XmlNode root = Reader.DocumentElement;
 
-                int numNodes = root.SelectNodes("//graph//vertex").Count;
-                Distances.Matrix = new decimal[numNodes, numNodes];
+                int numVertex = root.SelectNodes("//graph//vertex").Count;
+                _distances.newMatrix(numVertex);
 
                 int numRow = 0;
                 int numEdge = 0;
-                XmlNodeList nodelist1 = root.SelectNodes("//graph//vertex//edge");
-                foreach (XmlNode node in nodelist1) {
+                XmlNodeList Vertexlist1 = root.SelectNodes("//graph//vertex//edge");
+                foreach (XmlNode Vertex in Vertexlist1) {
 
-                    if (isChangeRow(numEdge, numNodes))
+                    if (isChangeRow(numEdge, numVertex))
                         numRow++;
 
-                    if (isNodeItself(numEdge, numNodes, numRow)) {
-                        Distances.Matrix[numRow, Convert.ToInt32(nodePositionRelativeRow(numEdge, numNodes))] = 0;
+                    if (isVertexItself(numEdge, numVertex, numRow)) {
+                        _distances.Matrix[numRow, Convert.ToInt32(VertexPositionRelativeRow(numEdge, numVertex))] = 0;
 
                         numEdge++;
                     }
 
-                    decimal cost = getCost(node.Attributes[0].Value);
-                    Distances.Matrix[numRow, Convert.ToInt32(node.FirstChild.Value)] = cost;
+                    decimal cost = getCost(Vertex.Attributes[0].Value);
+                    _distances.Matrix[numRow, Convert.ToInt32(Vertex.FirstChild.Value)] = cost;
 
                     numEdge++;
                 }
@@ -51,23 +55,30 @@ namespace Traveling_Salesman_Problem {
             }
         }
 
-        private bool isChangeRow (int numEdge, int numNodes) {
-            return ((numEdge % numNodes) == 0 && numEdge != 0 ? true : false);
+        private bool isChangeRow (int numEdge, int numVertex) {
+            return ((numEdge % numVertex) == 0 && numEdge != 0 ? true : false);
         }
 
-        private bool isNodeItself (int numEdge, int numNodes, int numRow) {
-            decimal nodePositionRelativeRow_ = nodePositionRelativeRow(numEdge, numNodes);
-            return (Convert.ToDecimal(numRow) == nodePositionRelativeRow_ ? true : false);
+        private bool isVertexItself (int numEdge, int numVertex, int numRow) {
+            decimal VertexPositionRelativeRow_ = VertexPositionRelativeRow(numEdge, numVertex);
+            return (Convert.ToDecimal(numRow) == VertexPositionRelativeRow_ ? true : false);
         }
 
-        private decimal nodePositionRelativeRow (int numEdge, int numNodes) {
-            return (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numNodes));
+        private decimal VertexPositionRelativeRow (int numEdge, int numVertex) {
+            return (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numVertex));
         }
 
         private decimal getCost (string value) {
             value = value.Replace('.', ',');
             value = value.Remove(value.LastIndexOf('e'), value.Count() - value.LastIndexOf('e'));
             return Convert.ToDecimal(value);
+        }
+
+        public void exec_UpperBound () {
+            _upperBound = new CTSP_UpperBound();
+
+            _upperBound.make(ref _distances);
+
         }
 
 

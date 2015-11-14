@@ -7,17 +7,26 @@ using System.Threading.Tasks;
 using System.Xml;
 
 namespace Traveling_Salesman_Problem {
-    class CTSP_Distances {
+    partial class CTSP_Distances {
 
         private decimal[,] _Matrix;
+        private int _numVertex;
 
         public decimal[,] Matrix {
             get { return _Matrix; }
-            set { _Matrix = value; }
         }
 
-        public CTSP_Distances () {
+        public int NumNodes {
+            get { return _numVertex; }
+        }
 
+
+        public CTSP_Distances () {
+        }
+
+        public void newMatrix(int numVertex) {
+            _numVertex = numVertex;
+            _Matrix = new decimal[numVertex, numVertex];
         }
 
     }

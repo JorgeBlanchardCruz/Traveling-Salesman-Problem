@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Traveling_Salesman_Problem {
     public partial class Form1 : Form {
 
-        CTSP_Distances TSProblem;
+        CTSP_instance TSProblem;
 
         public Form1 () {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace Traveling_Salesman_Problem {
         private void btOpenFile_Click (object sender, EventArgs e) {
             Stream file = selectFile(txFile);
 
-            TSProblem = new CTSP_Distances();
+            TSProblem = new CTSP_instance();
 
             string error = TSProblem.makeFromFile(ref file);
 
@@ -32,11 +32,12 @@ namespace Traveling_Salesman_Problem {
             } else {
                 lbLoad.ForeColor = Color.OliveDrab;
                 lbLoad.Text = "TSP cargado correctamente";
-
-
             }
         }
 
+        private void btExec_upperBound_Click (object sender, EventArgs e) {
+            TSProblem.exec_UpperBound();
+        }
 
         private Stream selectFile (Control putFileName) {
 
@@ -58,6 +59,7 @@ namespace Traveling_Salesman_Problem {
 
             return null;
         }
+
 
     }
 }

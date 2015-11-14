@@ -27,6 +27,7 @@
             this.btOpenFile = new System.Windows.Forms.Button();
             this.txFile = new System.Windows.Forms.TextBox();
             this.lbLoad = new System.Windows.Forms.Label();
+            this.btExec_upperBound = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -36,9 +37,9 @@
             this.label2.ForeColor = System.Drawing.Color.DimGray;
             this.label2.Location = new System.Drawing.Point(49, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 15);
+            this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 9;
-            this.label2.Text = "File";
+            this.label2.Text = "XML File";
             // 
             // btOpenFile
             // 
@@ -69,12 +70,23 @@
             this.lbLoad.Size = new System.Drawing.Size(0, 20);
             this.lbLoad.TabIndex = 10;
             // 
+            // btExec_upperBound
+            // 
+            this.btExec_upperBound.Location = new System.Drawing.Point(52, 121);
+            this.btExec_upperBound.Name = "btExec_upperBound";
+            this.btExec_upperBound.Size = new System.Drawing.Size(134, 25);
+            this.btExec_upperBound.TabIndex = 11;
+            this.btExec_upperBound.Text = "1 - Exec UpperBound";
+            this.btExec_upperBound.UseVisualStyleBackColor = true;
+            this.btExec_upperBound.Click += new System.EventHandler(this.btExec_upperBound_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(624, 465);
+            this.Controls.Add(this.btExec_upperBound);
             this.Controls.Add(this.lbLoad);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btOpenFile);
@@ -95,6 +107,7 @@
         private System.Windows.Forms.Button btOpenFile;
         private System.Windows.Forms.TextBox txFile;
         private System.Windows.Forms.Label lbLoad;
+        private System.Windows.Forms.Button btExec_upperBound;
     }
 }
 

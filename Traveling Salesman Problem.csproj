@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CTSP_Distances.cs" />
     <Compile Include="CTSP_instance.cs" />
+    <Compile Include="CTSP_UpperBound.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
