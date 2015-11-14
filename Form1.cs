@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Traveling_Salesman_Problem {
     public partial class Form1 : Form {
 
-        CTSP_instance TSProblem;
+        CTSP_Distances TSProblem;
 
         public Form1 () {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace Traveling_Salesman_Problem {
         private void btOpenFile_Click (object sender, EventArgs e) {
             Stream file = selectFile(txFile);
 
-            TSProblem = new CTSP_instance();
+            TSProblem = new CTSP_Distances();
 
             string error = TSProblem.makeFromFile(ref file);
 
