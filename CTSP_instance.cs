@@ -14,6 +14,10 @@ namespace Traveling_Salesman_Problem {
 
         private CTSP_UpperBound _upperBound;
 
+        public CTSP_UpperBound upperBound {
+            get { return _upperBound; }
+        }
+
 
 
         public string makeFromFile (ref Stream file) {

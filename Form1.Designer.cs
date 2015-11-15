@@ -28,6 +28,12 @@
             this.txFile = new System.Windows.Forms.TextBox();
             this.lbLoad = new System.Windows.Forms.Label();
             this.btExec_upperBound = new System.Windows.Forms.Button();
+            this.txUpperBound = new System.Windows.Forms.TextBox();
+            this.pnActions = new System.Windows.Forms.Panel();
+            this.txRoute = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pnActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -35,7 +41,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(49, 54);
+            this.label2.Location = new System.Drawing.Point(49, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 9;
@@ -43,7 +49,7 @@
             // 
             // btOpenFile
             // 
-            this.btOpenFile.Location = new System.Drawing.Point(543, 71);
+            this.btOpenFile.Location = new System.Drawing.Point(543, 48);
             this.btOpenFile.Name = "btOpenFile";
             this.btOpenFile.Size = new System.Drawing.Size(33, 25);
             this.btOpenFile.TabIndex = 8;
@@ -54,7 +60,7 @@
             // txFile
             // 
             this.txFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txFile.Location = new System.Drawing.Point(52, 72);
+            this.txFile.Location = new System.Drawing.Point(52, 49);
             this.txFile.Name = "txFile";
             this.txFile.ReadOnly = true;
             this.txFile.Size = new System.Drawing.Size(485, 23);
@@ -65,14 +71,14 @@
             this.lbLoad.AutoSize = true;
             this.lbLoad.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLoad.ForeColor = System.Drawing.Color.Firebrick;
-            this.lbLoad.Location = new System.Drawing.Point(55, 98);
+            this.lbLoad.Location = new System.Drawing.Point(55, 75);
             this.lbLoad.Name = "lbLoad";
             this.lbLoad.Size = new System.Drawing.Size(0, 20);
             this.lbLoad.TabIndex = 10;
             // 
             // btExec_upperBound
             // 
-            this.btExec_upperBound.Location = new System.Drawing.Point(52, 121);
+            this.btExec_upperBound.Location = new System.Drawing.Point(40, 14);
             this.btExec_upperBound.Name = "btExec_upperBound";
             this.btExec_upperBound.Size = new System.Drawing.Size(134, 25);
             this.btExec_upperBound.TabIndex = 11;
@@ -80,13 +86,68 @@
             this.btExec_upperBound.UseVisualStyleBackColor = true;
             this.btExec_upperBound.Click += new System.EventHandler(this.btExec_upperBound_Click);
             // 
+            // txUpperBound
+            // 
+            this.txUpperBound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txUpperBound.Location = new System.Drawing.Point(172, 45);
+            this.txUpperBound.Name = "txUpperBound";
+            this.txUpperBound.ReadOnly = true;
+            this.txUpperBound.Size = new System.Drawing.Size(353, 23);
+            this.txUpperBound.TabIndex = 12;
+            // 
+            // pnActions
+            // 
+            this.pnActions.Controls.Add(this.label3);
+            this.pnActions.Controls.Add(this.label1);
+            this.pnActions.Controls.Add(this.txRoute);
+            this.pnActions.Controls.Add(this.btExec_upperBound);
+            this.pnActions.Controls.Add(this.txUpperBound);
+            this.pnActions.Enabled = false;
+            this.pnActions.Location = new System.Drawing.Point(12, 98);
+            this.pnActions.Name = "pnActions";
+            this.pnActions.Size = new System.Drawing.Size(600, 355);
+            this.pnActions.TabIndex = 13;
+            // 
+            // txRoute
+            // 
+            this.txRoute.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txRoute.Location = new System.Drawing.Point(172, 74);
+            this.txRoute.Multiline = true;
+            this.txRoute.Name = "txRoute";
+            this.txRoute.ReadOnly = true;
+            this.txRoute.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txRoute.Size = new System.Drawing.Size(353, 76);
+            this.txRoute.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(71, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 15);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Upper Bound";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(110, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Route";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(624, 465);
-            this.Controls.Add(this.btExec_upperBound);
+            this.Controls.Add(this.pnActions);
             this.Controls.Add(this.lbLoad);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btOpenFile);
@@ -96,6 +157,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "The Traveling Salesman Problem";
+            this.pnActions.ResumeLayout(false);
+            this.pnActions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,6 +171,11 @@
         private System.Windows.Forms.TextBox txFile;
         private System.Windows.Forms.Label lbLoad;
         private System.Windows.Forms.Button btExec_upperBound;
+        private System.Windows.Forms.TextBox txUpperBound;
+        private System.Windows.Forms.Panel pnActions;
+        private System.Windows.Forms.TextBox txRoute;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }
 

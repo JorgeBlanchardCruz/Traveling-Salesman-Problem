@@ -12,6 +12,14 @@ namespace Traveling_Salesman_Problem {
         private List<int> _route;
         private decimal _upperBound;
 
+        public List<int> Route {
+            get { return _route; }
+        }
+
+        public decimal upperBound {
+            get { return _upperBound; }
+        }
+
         public CTSP_UpperBound () {
             _distances = null;
             _route = new List<int>();

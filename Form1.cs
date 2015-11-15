@@ -28,15 +28,23 @@ namespace Traveling_Salesman_Problem {
             if (error != string.Empty) {
                 lbLoad.ForeColor = Color.Firebrick;
                 lbLoad.Text = error;
+                pnActions.Enabled = false;
 
             } else {
                 lbLoad.ForeColor = Color.OliveDrab;
                 lbLoad.Text = "TSP cargado correctamente";
+                pnActions.Enabled = true;
             }
         }
 
         private void btExec_upperBound_Click (object sender, EventArgs e) {
             TSProblem.exec_UpperBound();
+
+            txUpperBound.Text = TSProblem.upperBound.upperBound.ToString();
+            txRoute.Text = string.Empty;
+            foreach (var vertex in TSProblem.upperBound.Route) {
+                txRoute.Text += vertex.ToString() + ",";
+            }
         }
 
         private Stream selectFile (Control putFileName) {
