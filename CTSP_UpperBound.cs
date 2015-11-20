@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace Traveling_Salesman_Problem {
     partial class CTSP_UpperBound {
 
+        private const int NUMNearestNeighbour = 50;
+
         private CTSP_Distances _distances;
 
         private List<int> _route;
@@ -29,41 +31,54 @@ namespace Traveling_Salesman_Problem {
         public void make (ref CTSP_Distances distances) {
             _distances = distances;
 
-            _upperBound = 0;
+            _route = exec_NearestNeighbour();
+            int best_distance = calculateTotalDistance(_route);
 
-            exec_NearestNeighbour();
+            for (int i = 1; i < NUMNearestNeighbour; i++) {
+                List<int> new_route = exec_NearestNeighbour();
+
+                int new_distance = calculateTotalDistance(new_route);               
+
+                if (new_distance < best_distance) {
+                    best_distance = new_distance;
+                    _route = new_route;
+                }
+            }            
 
             _2opt();
         }
 
-        public void exec_NearestNeighbour () {
+        public List<int> exec_NearestNeighbour () {
 
             Random random = new Random();
 
             int currentVertex = random.Next(0, _distances.NumNodes);
 
-            _route.Add(currentVertex);
+            List<int> new_route = new List<int>();
+
+            new_route.Add(currentVertex);
 
             for (int iteration = 0; iteration < _distances.NumNodes - 1; iteration++) {
 
-                int nearbyUnvisitedVertex = find_nearbyUnvisitedVertex(currentVertex);
-                _upperBound += _distances.Matrix[currentVertex, nearbyUnvisitedVertex];
+                int nearbyUnvisitedVertex = find_nearbyUnvisitedVertex(new_route, currentVertex);
 
                 currentVertex = nearbyUnvisitedVertex;
 
-                _route.Add(currentVertex);
+                new_route.Add(currentVertex);
             }
 
-            _route.Add(_route[0]);
+            new_route.Add(new_route[0]);
+
+            return new_route;
         }
 
-        private int find_nearbyUnvisitedVertex (int currentVertex) {
+        private int find_nearbyUnvisitedVertex (List<int> route, int currentVertex) {
 
             int nearbyUnvisitedVertex = 0;
             int shortestEdge = int.MaxValue;  
                       
             for (int vertex = 0; vertex < _distances.NumNodes; vertex++) {
-                if (!isVertexItself(currentVertex, vertex) && !isVisited(vertex))
+                if (!isVertexItself(currentVertex, vertex) && !isVisited(route, vertex))
                     if (_distances.Matrix[currentVertex, vertex] < shortestEdge) {
 
                         nearbyUnvisitedVertex = vertex;
@@ -78,8 +93,8 @@ namespace Traveling_Salesman_Problem {
             return (vertex1 == vertex2 ? true : false);
         }
 
-        private bool isVisited (int vertex) {
-            foreach (int item in _route)
+        private bool isVisited (List<int> route, int vertex) {
+            foreach (int item in route)
                 if (vertex == item)
                     return true;
 
@@ -112,8 +127,8 @@ namespace Traveling_Salesman_Problem {
         }
 
         private bool _2opt_interation (int best_distance) {
-            for (int i = 0; i < _route.Count - 1; i++) {
-                for (int k = i + 1; k < _route.Count; k++) {
+            for (int i = 0; i < _route.Count - 2; i++) {
+                for (int k = i + 1; k < _route.Count - 1; k++) {
 
                     List<int> new_route = _2optSwap(_route, i, k);
 
@@ -142,8 +157,10 @@ namespace Traveling_Salesman_Problem {
                 new_route.Add(existing_route[n]);
 
             //3. take route[k+1] to end and add them in order to new_route
-            for (int n = k+1; n < existing_route.Count; n++)
+            for (int n = k+1; n < existing_route.Count - 1; n++)
                 new_route.Add(existing_route[n]);
+
+            new_route.Add(new_route[0]);
 
             return new_route;
 
