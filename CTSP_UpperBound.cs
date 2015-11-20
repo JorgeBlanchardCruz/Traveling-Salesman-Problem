@@ -10,20 +10,20 @@ namespace Traveling_Salesman_Problem {
         private CTSP_Distances _distances;
 
         private List<int> _route;
-        private decimal _upperBound;
+        private int _upperBound;
 
         public List<int> Route {
             get { return _route; }
         }
 
-        public decimal upperBound {
+        public int upperBound {
             get { return _upperBound; }
         }
 
         public CTSP_UpperBound () {
             _distances = null;
             _route = new List<int>();
-            _upperBound = decimal.MaxValue;
+            _upperBound = int.MaxValue;
         }
 
         public void make (ref CTSP_Distances distances) {
@@ -53,12 +53,14 @@ namespace Traveling_Salesman_Problem {
 
                 _route.Add(currentVertex);
             }
+
+            _route.Add(_route[0]);
         }
 
         private int find_nearbyUnvisitedVertex (int currentVertex) {
 
             int nearbyUnvisitedVertex = 0;
-            decimal shortestEdge = Decimal.MaxValue;  
+            int shortestEdge = int.MaxValue;  
                       
             for (int vertex = 0; vertex < _distances.NumNodes; vertex++) {
                 if (!isVertexItself(currentVertex, vertex) && !isVisited(vertex))
@@ -87,7 +89,7 @@ namespace Traveling_Salesman_Problem {
         private void _2opt () {
 
             bool impovement = true;
-            decimal best_distance = 0;
+            int best_distance = 0;
             while (impovement) {
 
                 impovement = false;
@@ -100,8 +102,8 @@ namespace Traveling_Salesman_Problem {
             _upperBound = best_distance;
         }
 
-        private decimal calculateTotalDistance(List<int> route) {
-            decimal distance = 0;
+        private int calculateTotalDistance(List<int> route) {
+            int distance = 0;
 
             for (int i = 1; i < route.Count; i++)
                 distance += _distances.Matrix[route[i - 1], route[i]];
@@ -109,13 +111,13 @@ namespace Traveling_Salesman_Problem {
             return distance;
         }
 
-        private bool _2opt_interation (decimal best_distance) {
+        private bool _2opt_interation (int best_distance) {
             for (int i = 0; i < _route.Count - 1; i++) {
                 for (int k = i + 1; k < _route.Count; k++) {
 
                     List<int> new_route = _2optSwap(_route, i, k);
 
-                    decimal new_distance = calculateTotalDistance(new_route);
+                    int new_distance = calculateTotalDistance(new_route);
 
                     if (new_distance < best_distance) {
                         _route = new_route;

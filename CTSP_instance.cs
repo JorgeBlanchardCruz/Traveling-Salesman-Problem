@@ -19,7 +19,6 @@ namespace Traveling_Salesman_Problem {
         }
 
 
-
         public string makeFromFile (ref Stream file) {
             try {
 
@@ -42,12 +41,11 @@ namespace Traveling_Salesman_Problem {
                         numRow++;
 
                     if (isVertexItself(numEdge, numVertex, numRow)) {
-                        _distances.Matrix[numRow, Convert.ToInt32(VertexPositionRelativeRow(numEdge, numVertex))] = 0;
-
+                        _distances.Matrix[numRow, Convert.ToInt32(VertexPositionRelativeRow(numEdge, numVertex))] = 0;  
                         numEdge++;
                     }
 
-                    decimal cost = getCost(Vertex.Attributes[0].Value);
+                    int cost = getCost(Vertex.Attributes[0].Value);
                     _distances.Matrix[numRow, Convert.ToInt32(Vertex.FirstChild.Value)] = cost;
 
                     numEdge++;
@@ -65,17 +63,19 @@ namespace Traveling_Salesman_Problem {
 
         private bool isVertexItself (int numEdge, int numVertex, int numRow) {
             decimal VertexPositionRelativeRow_ = VertexPositionRelativeRow(numEdge, numVertex);
-            return (Convert.ToDecimal(numRow) == VertexPositionRelativeRow_ ? true : false);
+            return (numRow == VertexPositionRelativeRow_ ? true : false);
         }
 
         private decimal VertexPositionRelativeRow (int numEdge, int numVertex) {
             return (Convert.ToDecimal(numEdge) / Convert.ToDecimal(numVertex));
         }
 
-        private decimal getCost (string value) {
+        private int getCost (string value) {
             value = value.Replace('.', ',');
-            value = value.Remove(value.LastIndexOf('e'), value.Count() - value.LastIndexOf('e'));
-            return Convert.ToDecimal(value);
+            Double tempvalue = new Double();
+            tempvalue = Convert.ToDouble(value);
+            //value = value.Remove(value.LastIndexOf('e'), value.Count() - value.LastIndexOf('e'));
+            return Convert.ToInt32(tempvalue);
         }
 
         public void exec_UpperBound () {

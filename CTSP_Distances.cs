@@ -9,10 +9,10 @@ using System.Xml;
 namespace Traveling_Salesman_Problem {
     partial class CTSP_Distances {
 
-        private decimal[,] _Matrix;
+        private int[,] _Matrix;
         private int _numVertex;
 
-        public decimal[,] Matrix {
+        public int[,] Matrix {
             get { return _Matrix; }
         }
 
@@ -26,7 +26,7 @@ namespace Traveling_Salesman_Problem {
 
         public void newMatrix(int numVertex) {
             _numVertex = numVertex;
-            _Matrix = new decimal[numVertex, numVertex];
+            _Matrix = new int[numVertex, numVertex];
         }
 
     }
