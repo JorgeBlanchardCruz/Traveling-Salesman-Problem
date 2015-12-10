@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Traveling_Salesman_Problem {
     partial class CTSP_UpperBound {
@@ -22,14 +19,13 @@ namespace Traveling_Salesman_Problem {
             get { return _upperBound; }
         }
 
-        public CTSP_UpperBound () {
-            _distances = null;
+        public CTSP_UpperBound (ref CTSP_Distances distances) {
+            _distances = distances;
             _route = new List<int>();
             _upperBound = int.MaxValue;
         }
 
-        public void make (ref CTSP_Distances distances) {
-            _distances = distances;
+        public void make () {
 
             _route = exec_NearestNeighbour();
             int best_distance = calculateTotalDistance(_route);

@@ -68,6 +68,5 @@ namespace Traveling_Salesman_Problem {
             return null;
         }
 
-
     }
 }

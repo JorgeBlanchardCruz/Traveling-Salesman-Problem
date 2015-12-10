@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 
@@ -13,6 +9,8 @@ namespace Traveling_Salesman_Problem {
         private CTSP_Distances _distances;
 
         private CTSP_UpperBound _upperBound;
+
+        private CTSP_BranchAndBound _branchAndBound;
 
         public CTSP_UpperBound upperBound {
             get { return _upperBound; }
@@ -79,10 +77,13 @@ namespace Traveling_Salesman_Problem {
         }
 
         public void exec_UpperBound () {
-            _upperBound = new CTSP_UpperBound();
+            _upperBound = new CTSP_UpperBound(ref _distances);
+            _upperBound.make();
+        }
 
-            _upperBound.make(ref _distances);
-
+        public void exec_BranchAndBound () {
+            _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.upperBound);
+            _branchAndBound.make();
         }
 
 
