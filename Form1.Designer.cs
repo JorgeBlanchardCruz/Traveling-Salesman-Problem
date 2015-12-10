@@ -30,9 +30,10 @@
             this.btExec_upperBound = new System.Windows.Forms.Button();
             this.txUpperBound = new System.Windows.Forms.TextBox();
             this.pnActions = new System.Windows.Forms.Panel();
-            this.txRoute = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btExec_BranchAndBound = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txRoute = new System.Windows.Forms.TextBox();
             this.pnActions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +98,7 @@
             // 
             // pnActions
             // 
+            this.pnActions.Controls.Add(this.btExec_BranchAndBound);
             this.pnActions.Controls.Add(this.label3);
             this.pnActions.Controls.Add(this.label1);
             this.pnActions.Controls.Add(this.txRoute);
@@ -108,16 +110,26 @@
             this.pnActions.Size = new System.Drawing.Size(600, 355);
             this.pnActions.TabIndex = 13;
             // 
-            // txRoute
+            // btExec_BranchAndBound
             // 
-            this.txRoute.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txRoute.Location = new System.Drawing.Point(172, 74);
-            this.txRoute.Multiline = true;
-            this.txRoute.Name = "txRoute";
-            this.txRoute.ReadOnly = true;
-            this.txRoute.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txRoute.Size = new System.Drawing.Size(353, 76);
-            this.txRoute.TabIndex = 13;
+            this.btExec_BranchAndBound.Location = new System.Drawing.Point(40, 176);
+            this.btExec_BranchAndBound.Name = "btExec_BranchAndBound";
+            this.btExec_BranchAndBound.Size = new System.Drawing.Size(134, 35);
+            this.btExec_BranchAndBound.TabIndex = 16;
+            this.btExec_BranchAndBound.Text = "2 - Exec BranchAndBound";
+            this.btExec_BranchAndBound.UseVisualStyleBackColor = true;
+            this.btExec_BranchAndBound.Click += new System.EventHandler(this.btExec_BranchAndBound_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(110, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Route";
             // 
             // label1
             // 
@@ -130,16 +142,16 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Upper Bound";
             // 
-            // label3
+            // txRoute
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(110, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Route";
+            this.txRoute.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txRoute.Location = new System.Drawing.Point(172, 74);
+            this.txRoute.Multiline = true;
+            this.txRoute.Name = "txRoute";
+            this.txRoute.ReadOnly = true;
+            this.txRoute.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txRoute.Size = new System.Drawing.Size(353, 76);
+            this.txRoute.TabIndex = 13;
             // 
             // Form1
             // 
@@ -176,6 +188,7 @@
         private System.Windows.Forms.TextBox txRoute;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btExec_BranchAndBound;
     }
 }
 

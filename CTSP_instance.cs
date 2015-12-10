@@ -16,6 +16,7 @@ namespace Traveling_Salesman_Problem {
             get { return _upperBound; }
         }
 
+        private int _numVertex;
 
         public string makeFromFile (ref Stream file) {
             try {
@@ -27,19 +28,19 @@ namespace Traveling_Salesman_Problem {
 
                 XmlNode root = Reader.DocumentElement;
 
-                int numVertex = root.SelectNodes("//graph//vertex").Count;
-                _distances.newMatrix(numVertex);
+                _numVertex = root.SelectNodes("//graph//vertex").Count;
+                _distances.newMatrix(_numVertex);
 
                 int numRow = 0;
                 int numEdge = 0;
                 XmlNodeList Vertexlist1 = root.SelectNodes("//graph//vertex//edge");
                 foreach (XmlNode Vertex in Vertexlist1) {
 
-                    if (isChangeRow(numEdge, numVertex))
+                    if (isChangeRow(numEdge, _numVertex))
                         numRow++;
 
-                    if (isVertexItself(numEdge, numVertex, numRow)) {
-                        _distances.Matrix[numRow, Convert.ToInt32(VertexPositionRelativeRow(numEdge, numVertex))] = 0;  
+                    if (isVertexItself(numEdge, _numVertex, numRow)) {
+                        _distances.Matrix[numRow, Convert.ToInt32(VertexPositionRelativeRow(numEdge, _numVertex))] = 0;  
                         numEdge++;
                     }
 
@@ -82,7 +83,7 @@ namespace Traveling_Salesman_Problem {
         }
 
         public void exec_BranchAndBound () {
-            _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.upperBound);
+            _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.Route, _upperBound.upperBound, _numVertex);
             _branchAndBound.make();
         }
 

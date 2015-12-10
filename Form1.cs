@@ -47,6 +47,10 @@ namespace Traveling_Salesman_Problem {
             }
         }
 
+        private void btExec_BranchAndBound_Click (object sender, EventArgs e) {
+            TSProblem.exec_BranchAndBound();
+        }
+
         private Stream selectFile (Control putFileName) {
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -54,7 +58,7 @@ namespace Traveling_Salesman_Problem {
             openFileDialog1.Filter = "XML Files (.xml)|*.xml";
             openFileDialog1.FilterIndex = 1;
 
-            openFileDialog1.InitialDirectory = Application.StartupPath;
+            openFileDialog1.InitialDirectory = "E:\\Ingeniería Informática\\2015-2016\\COMPLEJIDAD COMPUTACIONAL\\Practica 4 Traveling Salesman Problem\\Traveling Salesman Problem\\Test\burma14.xml";
             openFileDialog1.Multiselect = false;
 
             DialogResult userClicked = openFileDialog1.ShowDialog();
@@ -66,6 +70,10 @@ namespace Traveling_Salesman_Problem {
             }
 
             return null;
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+
         }
 
     }
