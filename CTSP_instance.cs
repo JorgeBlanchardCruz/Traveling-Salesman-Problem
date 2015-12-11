@@ -83,7 +83,7 @@ namespace Traveling_Salesman_Problem {
         }
 
         public void exec_BranchAndBound () {
-            _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.Route, _upperBound.upperBound, _numVertex);
+            _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.upperBound, _numVertex);
             _branchAndBound.run();
         }
 

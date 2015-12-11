@@ -26,12 +26,11 @@ namespace Traveling_Salesman_Problem {
         }
 
         public void run () {
-
-            _route = exec_NearestNeighbour();
+            _route = exec_NearestNeighbour(getRandomFirstVertex());
             int best_distance = calculateTotalDistance(_route);
 
             for (int i = 1; i < NUMNearestNeighbour; i++) {
-                List<int> new_route = exec_NearestNeighbour();
+                List<int> new_route = exec_NearestNeighbour(getRandomFirstVertex());
 
                 int new_distance = calculateTotalDistance(new_route);               
 
@@ -44,15 +43,27 @@ namespace Traveling_Salesman_Problem {
             _2opt();
         }
 
-        public List<int> exec_NearestNeighbour () {
-
+        private List<int> getRandomFirstVertex () {
             Random random = new Random();
-
-            int currentVertex = random.Next(0, _distances.NumNodes);
+            int firstVertex = random.Next(0, _distances.NumNodes);
 
             List<int> new_route = new List<int>();
+            new_route.Add(firstVertex);
 
-            new_route.Add(currentVertex);
+            return new_route;
+        }
+
+        public int run (List<int> partialroute) {
+            List<int> new_route = partialroute.GetRange(0, partialroute.Count); ;
+            _route = exec_NearestNeighbour(new_route);
+            //_2opt();
+
+            return calculateTotalDistance(_route);
+        }
+
+        private List<int> exec_NearestNeighbour (List<int> new_route) {
+
+            int currentVertex = new_route[new_route.Count - 1];
 
             for (int iteration = 0; iteration < _distances.NumNodes - 1; iteration++) {
 
@@ -89,7 +100,7 @@ namespace Traveling_Salesman_Problem {
             return (vertex1 == vertex2 ? true : false);
         }
 
-        private bool isVisited (List<int> route, int vertex) {
+        public bool isVisited (List<int> route, int vertex) {
             foreach (int item in route)
                 if (vertex == item)
                     return true;
@@ -113,7 +124,7 @@ namespace Traveling_Salesman_Problem {
             _upperBound = best_distance;
         }
 
-        private int calculateTotalDistance(List<int> route) {
+        public int calculateTotalDistance(List<int> route) {
             int distance = 0;
 
             for (int i = 1; i < route.Count; i++)
