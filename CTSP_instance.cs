@@ -79,12 +79,12 @@ namespace Traveling_Salesman_Problem {
 
         public void exec_UpperBound () {
             _upperBound = new CTSP_UpperBound(ref _distances);
-            _upperBound.make();
+            _upperBound.run();
         }
 
         public void exec_BranchAndBound () {
             _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.Route, _upperBound.upperBound, _numVertex);
-            _branchAndBound.make();
+            _branchAndBound.run();
         }
 
 

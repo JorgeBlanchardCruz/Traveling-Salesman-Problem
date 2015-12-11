@@ -25,7 +25,7 @@ namespace Traveling_Salesman_Problem {
             _upperBound = int.MaxValue;
         }
 
-        public void make () {
+        public void run () {
 
             _route = exec_NearestNeighbour();
             int best_distance = calculateTotalDistance(_route);
