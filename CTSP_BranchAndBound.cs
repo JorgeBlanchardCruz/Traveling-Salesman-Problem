@@ -60,13 +60,14 @@ namespace Traveling_Salesman_Problem {
         private int KruskalBound () {
             List<List<int>> Kruskalrun = Kruskal(ref _distances);
 
-            foreach (var fil in Kruskalrun) {
-                foreach (var col in item) {
-
+            int KruskalSum = 0;
+            foreach (List<int> fil in Kruskalrun) {
+                foreach (int col in fil) {
+                    KruskalSum += col;
                 }
             }
 
-            return 20900;
+            return KruskalSum;
         }
 
         private List<List<int>> Kruskal (ref CTSP_Distances adyacencia) {
