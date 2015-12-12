@@ -34,7 +34,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txRoute = new System.Windows.Forms.TextBox();
+            this.pnBranchAndBound = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txOptimalRoute = new System.Windows.Forms.TextBox();
+            this.txBestCost = new System.Windows.Forms.TextBox();
             this.pnActions.SuspendLayout();
+            this.pnBranchAndBound.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -98,7 +104,7 @@
             // 
             // pnActions
             // 
-            this.pnActions.Controls.Add(this.btExec_BranchAndBound);
+            this.pnActions.Controls.Add(this.pnBranchAndBound);
             this.pnActions.Controls.Add(this.label3);
             this.pnActions.Controls.Add(this.label1);
             this.pnActions.Controls.Add(this.txRoute);
@@ -112,7 +118,7 @@
             // 
             // btExec_BranchAndBound
             // 
-            this.btExec_BranchAndBound.Location = new System.Drawing.Point(40, 176);
+            this.btExec_BranchAndBound.Location = new System.Drawing.Point(37, 3);
             this.btExec_BranchAndBound.Name = "btExec_BranchAndBound";
             this.btExec_BranchAndBound.Size = new System.Drawing.Size(134, 35);
             this.btExec_BranchAndBound.TabIndex = 16;
@@ -153,6 +159,61 @@
             this.txRoute.Size = new System.Drawing.Size(353, 76);
             this.txRoute.TabIndex = 13;
             // 
+            // pnBranchAndBound
+            // 
+            this.pnBranchAndBound.Controls.Add(this.label4);
+            this.pnBranchAndBound.Controls.Add(this.label5);
+            this.pnBranchAndBound.Controls.Add(this.txOptimalRoute);
+            this.pnBranchAndBound.Controls.Add(this.txBestCost);
+            this.pnBranchAndBound.Controls.Add(this.btExec_BranchAndBound);
+            this.pnBranchAndBound.Enabled = false;
+            this.pnBranchAndBound.Location = new System.Drawing.Point(3, 156);
+            this.pnBranchAndBound.Name = "pnBranchAndBound";
+            this.pnBranchAndBound.Size = new System.Drawing.Size(594, 196);
+            this.pnBranchAndBound.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DimGray;
+            this.label4.Location = new System.Drawing.Point(61, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 15);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Optimal Route";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
+            this.label5.Location = new System.Drawing.Point(89, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 15);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Best Cost";
+            // 
+            // txOptimalRoute
+            // 
+            this.txOptimalRoute.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txOptimalRoute.Location = new System.Drawing.Point(169, 85);
+            this.txOptimalRoute.Multiline = true;
+            this.txOptimalRoute.Name = "txOptimalRoute";
+            this.txOptimalRoute.ReadOnly = true;
+            this.txOptimalRoute.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txOptimalRoute.Size = new System.Drawing.Size(353, 76);
+            this.txOptimalRoute.TabIndex = 18;
+            // 
+            // txBestCost
+            // 
+            this.txBestCost.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBestCost.Location = new System.Drawing.Point(169, 56);
+            this.txBestCost.Name = "txBestCost";
+            this.txBestCost.ReadOnly = true;
+            this.txBestCost.Size = new System.Drawing.Size(353, 23);
+            this.txBestCost.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +232,8 @@
             this.Text = "The Traveling Salesman Problem";
             this.pnActions.ResumeLayout(false);
             this.pnActions.PerformLayout();
+            this.pnBranchAndBound.ResumeLayout(false);
+            this.pnBranchAndBound.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +252,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btExec_BranchAndBound;
+        private System.Windows.Forms.Panel pnBranchAndBound;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txOptimalRoute;
+        private System.Windows.Forms.TextBox txBestCost;
     }
 }
 

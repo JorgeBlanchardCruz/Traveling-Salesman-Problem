@@ -12,8 +12,15 @@ namespace Traveling_Salesman_Problem {
 
         private CTSP_BranchAndBound _branchAndBound;
 
-        public CTSP_UpperBound upperBound {
+
+        public CTSP_UpperBound upperBound
+        {
             get { return _upperBound; }
+        }
+        
+        public CTSP_BranchAndBound branchAndBound
+        {
+            get { return _branchAndBound; }
         }
 
         private int _numVertex;
@@ -86,7 +93,6 @@ namespace Traveling_Salesman_Problem {
             _branchAndBound = new CTSP_BranchAndBound(ref _distances, _upperBound.upperBound, _numVertex);
             _branchAndBound.run();
         }
-
 
     }
 }

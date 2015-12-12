@@ -6,7 +6,9 @@ using System.Text;
 namespace Traveling_Salesman_Problem {
     partial class CTSP_BranchAndBound {
 
-        private class CBranch {            
+        private class CBranch {
+            public CBranch _parentBranch;
+            public int _branchlevel;
             public int _vertex;
             public int _cost;
             public int _lowerBound;
@@ -14,7 +16,19 @@ namespace Traveling_Salesman_Problem {
             public List<int> _partialRoute;
             public List<CBranch> _childrenBranches;
 
-            public CBranch (int vertex, int cost, int lowerBound, List<int> partialRoute, bool pruned = false) {
+            public CBranch (ref CBranch parentBranch, int branchlevel, int vertex, int cost, int lowerBound, List<int> partialRoute, bool pruned = false) {
+                _parentBranch = parentBranch;
+                _branchlevel = branchlevel;
+                _vertex = vertex;
+                _cost = cost;
+                _lowerBound = lowerBound;
+                _pruned = pruned;
+                _partialRoute = partialRoute;
+                _childrenBranches = new List<CBranch>();
+            }
+
+            public CBranch (int branchlevel, int vertex, int cost, int lowerBound, List<int> partialRoute, bool pruned = false) {
+                _branchlevel = branchlevel;
                 _vertex = vertex;
                 _cost = cost;
                 _lowerBound = lowerBound;
@@ -24,32 +38,62 @@ namespace Traveling_Salesman_Problem {
             }
         }
 
+        private const int _PERCUP = 20;
 
         private CTSP_UpperBound _TSPupperBound;
 
         private CTSP_Distances _distances;
         private int _upperBound;
         private int _numVertex;
+        private int _bestCost;
+
+        private List<int> _optimalRoute;
 
         private CBranch _tree;
 
+        public int bestCost
+        {
+            get { return _bestCost; }
+        }
+
+        public List<int> optimalRoute
+        {
+            get { return _optimalRoute; }
+        }
+
         public CTSP_BranchAndBound (ref CTSP_Distances distances, int upperBound, int numVertex) {
             _distances = distances;
-            _upperBound = upperBound + ((upperBound * 20) / 100);
+            _upperBound = upperBound + ((upperBound * _PERCUP) / 100);
             _numVertex = numVertex;
+            _bestCost = int.MaxValue;
 
-            _tree = new CBranch(-1, 0, _upperBound, new List<int>());
+            _tree = new CBranch(-1,-1, 0, _upperBound, new List<int>());
 
             _TSPupperBound = new CTSP_UpperBound(ref _distances);
         }
 
         public void run () {
-            BranchAndBound(_tree);
+            BranchAndBound(_tree, 0);
         }
 
-        private void BranchAndBound (CBranch parentbranch) {
+        private void BranchAndBound (CBranch parentbranch, int level) {
             if (parentbranch._pruned)
                 return;
+
+            if (level == _numVertex) {
+                //getRoute(ref parentbranch);
+
+                parentbranch._partialRoute.Add(parentbranch._partialRoute[0]);
+
+                parentbranch._cost += _distances.Matrix[parentbranch._partialRoute[parentbranch._partialRoute.Count - 2], parentbranch._partialRoute[parentbranch._partialRoute.Count - 1]];
+
+                if (_bestCost > parentbranch._cost) {
+                    _bestCost = parentbranch._cost;
+                    _optimalRoute = parentbranch._partialRoute;
+                }
+            }                
+
+            int savelevel = level;
 
             for (int i = 0; i < _numVertex; i++) {
                 if (!_TSPupperBound.isVisited(parentbranch._partialRoute, i)) {
@@ -65,18 +109,41 @@ namespace Traveling_Salesman_Problem {
                     int lowerbound = _TSPupperBound.run(partialroute);
                     bool pruned = (lowerbound > _upperBound ? true : false);
 
-                    parentbranch._childrenBranches.Add(new CBranch(i, cost, lowerbound, partialroute, pruned));
+                    parentbranch._childrenBranches.Add(new CBranch(ref parentbranch, level, i, cost, lowerbound, partialroute, pruned));
                 }
             }
 
             foreach (CBranch branch in parentbranch._childrenBranches) {
                 if (!branch._pruned) {
-                    BranchAndBound(branch);
-                }
-                    
+                    BranchAndBound(branch, level + 1);
+
+                    level = savelevel;
+                }                    
             }
         }
 
+        private void getRoute (ref CBranch lastbranch) {
+
+            List<int> route = new List<int>();
+
+            CBranch currentBranch = lastbranch;
+            while (currentBranch != null) {
+
+                route.Add(currentBranch._vertex);
+
+                currentBranch = currentBranch._parentBranch;
+            }
+
+            route.Reverse();
+            route.Add(route[0]);
+
+            int totalCost = lastbranch._cost + _distances.Matrix[route[route.Count - 2], route[route.Count - 1]];
+            //lastbranch._childrenBranches.Add(ref lastbranch, route.Count, route[route.Count - 1], totalCost, totalCost, partialroute, pruned)
+
+            if (_bestCost > totalCost) {
+                _bestCost = totalCost;
+            }
+        }
 
         private int KruskalBound (ref List<int> partialRoute) {
             List<List<int>> Kruskalrun = Kruskal(_distances, ref partialRoute);

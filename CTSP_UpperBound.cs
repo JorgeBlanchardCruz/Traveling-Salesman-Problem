@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace Traveling_Salesman_Problem {
     partial class CTSP_UpperBound {
 
@@ -54,11 +55,11 @@ namespace Traveling_Salesman_Problem {
         }
 
         public int run (List<int> partialroute) {
-            List<int> new_route = partialroute.GetRange(0, partialroute.Count); ;
-            _route = exec_NearestNeighbour(new_route);
+            List<int> new_route = partialroute.GetRange(0, partialroute.Count);
+            exec_NearestNeighbour(new_route);
             //_2opt();
 
-            return calculateTotalDistance(_route);
+            return calculateTotalDistance(new_route);
         }
 
         private List<int> exec_NearestNeighbour (List<int> new_route) {
@@ -172,7 +173,6 @@ namespace Traveling_Salesman_Problem {
             return new_route;
 
         }
-
 
     }
 }
