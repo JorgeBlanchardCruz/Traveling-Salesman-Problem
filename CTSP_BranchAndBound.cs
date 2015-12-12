@@ -38,7 +38,7 @@ namespace Traveling_Salesman_Problem {
             }
         }
 
-        private const int _PERCUP = 20;
+        private const int _PERCUP = 18;
 
         private CTSP_UpperBound _TSPupperBound;
 
@@ -66,6 +66,8 @@ namespace Traveling_Salesman_Problem {
             _upperBound = upperBound + ((upperBound * _PERCUP) / 100);
             _numVertex = numVertex;
             _bestCost = int.MaxValue;
+
+            _optimalRoute = new List<int>();
 
             _tree = new CBranch(-1,-1, 0, _upperBound, new List<int>());
 
